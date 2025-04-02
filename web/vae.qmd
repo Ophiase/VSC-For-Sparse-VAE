@@ -47,4 +47,4 @@ $$ \mathcal{L}_{\beta\text{-VAE}} = \mathbb{E}_{q_\phi(z|x)} [\log p_\theta(x|z)
 - When $\beta = 1$, the $\beta$-VAE reduces to the standard VAE.
 - Increasing $\beta$ encourages disentanglement in the latent space, making it more interpretable but potentially at the cost of reconstruction quality.
 
-The $\beta$-VAE is particularly useful in scenarios where interpretability of the latent space is critical, such as in disentangled representation learning. However, careful tuning of $\beta$ is required to balance reconstruction and disentanglement.
+The $\beta$-VAE is particularly useful in scenarios where interpretability of the latent space is critical, such as in disentangled representation learning. However, careful tuning of $\beta$ is required to balance reconstruction and disentanglement. Also, $\beta$-VAE often work under the asumption that all the target features are present in all the data points.

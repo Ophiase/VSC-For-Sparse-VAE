@@ -4,13 +4,15 @@ title: Variational Sparse Coding
 
 ## Motivation
 
-**What is Posterior Collapse?**  
+We would want a model that has an interpretable latent space (by introducing sparcity) with more general feature disentenglement that $\beta$-VAE, meaning that different combinations of features can be present in different data points.
 
-- **Problem**: In VAEs, some latent dimensions become "useless" – they encode no meaningful information.  
+**What is Posterior Collapse?**
+
+- **Problem**: In VAEs, some latent dimensions become "useless" – they encode no meaningful information.
 - **Why it happens**:  
   - The KL divergence term in ELBO forces latent variables to match the prior. 
   - If the decoder is too powerful, it ignores latent variables, leading to **dimensions being permanently inactive**.  
-  - Result: Model uses only a few dimensions, losing sparsity and disentanglement.  
+  - Result: Model uses only a few dimensions, losing sparsity and disentanglement.
 
 
 **How VSC Fixes It**:  
