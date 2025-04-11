@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.4.538">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -98,6 +98,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Report - Variational Sparse Coding</a> 
         <div class="sidebar-tools-main">
+    <a href="https://github.com/your-username/your-repo-namehttps://github.com/Ophiase/VSC-For-Sparse-VAE" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="./Report---Variational-Sparse-Coding.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
@@ -151,7 +152,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#latent-space-visualization" id="toc-latent-space-visualization" class="nav-link active" data-scroll-target="#latent-space-visualization"><span class="header-section-number">5.1</span> Latent Space Visualization</a></li>
+  <li><a href="#activated-dimensions" id="toc-activated-dimensions" class="nav-link" data-scroll-target="#activated-dimensions"><span class="header-section-number">5.2</span> Activated Dimensions</a></li>
+  <li><a href="#reconstruction" id="toc-reconstruction" class="nav-link" data-scroll-target="#reconstruction"><span class="header-section-number">5.3</span> Reconstruction</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -175,8 +184,43 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>In this section, we validate the theoretical insights through practical experiments.<br>
+We implemented and trained from scratch four models on the MNIST dataset:</p>
+<ul>
+<li>AutoEncoder (AE)</li>
+<li>Variational AutoEncoder (VAE)<br>
+</li>
+<li>Variational Sparse Coding (VSC)<br>
+</li>
+<li>Variational Sparse Coding with Warm-Up (VSC-WU)</li>
+</ul>
+<p>All models share the same encoder/decoder structure: three convolutional layers with ReLU activations, ensuring a fair comparison by keeping the number of parameters approximately equal. Each model was trained using the Adam optimizer over ? epochs.</p>
+<hr>
+<section id="latent-space-visualization" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="latent-space-visualization"><span class="header-section-number">5.1</span> Latent Space Visualization</h2>
+<p>To qualitatively evaluate the structure of the latent space, we sample from a 2D grid of latent vectors.<br>
+Each point is decoded to an image, providing insight into how the model organizes information in the latent space.</p>
+<p><img src="assets/graphics/autoencoder/latent_space.png" class="img-fluid" alt="AE Latent Space"> <img src="assets/graphics/vae/latent_space.png" class="img-fluid" alt="VAE Latent Space"> <img src="assets/graphics/vsc/latent_space.png" class="img-fluid" alt="VSC Latent Space"> <img src="assets/graphics/vsc_warmup/latent_space.png" class="img-fluid" alt="VSC-WU Latent Space"></p>
+<p>TODO : interpretation</p>
+<hr>
+</section>
+<section id="activated-dimensions" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="activated-dimensions"><span class="header-section-number">5.2</span> Activated Dimensions</h2>
+<p>We visualize how each latent dimension is activated across the dataset categories.<br>
+For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.</p>
+<p>This helps us identify how interpretable and sparse the representations are, especially for the VSC models.</p>
+<p><img src="assets/graphics/autoencoder/activated_dimensions.png" class="img-fluid" alt="AE Activated Dimensions"> <img src="assets/graphics/vae/activated_dimensions.png" class="img-fluid" alt="VAE Activated Dimensions"> <img src="assets/graphics/vsc/activated_dimensions.png" class="img-fluid" alt="VSC Activated Dimensions"> <img src="assets/graphics/vsc_warmup/activated_dimensions.png" class="img-fluid" alt="VSC-WU Activated Dimensions"></p>
+<p>TODO: interpretation</p>
+<hr>
+</section>
+<section id="reconstruction" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="reconstruction"><span class="header-section-number">5.3</span> Reconstruction</h2>
+<p>Finally, we evaluate reconstruction quality by comparing recontructing original and noisy images. This assesses both fidelity and robustness to perturbations.</p>
+<p><img src="assets/graphics/autoencoder/reconstruction.png" class="img-fluid" alt="AE Reconstructions"> <img src="assets/graphics/vae/reconstruction.png" class="img-fluid" alt="VAE Reconstructions"> <img src="assets/graphics/vsc/reconstruction.png" class="img-fluid" alt="VSC Reconstructions"> <img src="assets/graphics/vsc_warmup/reconstruction.png" class="img-fluid" alt="VSC-WU Reconstructions"></p>
+<p>TODO: interpretation</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -258,24 +302,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -310,11 +336,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -362,12 +384,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -590,12 +607,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./vsc.html" class="pagination-link" aria-label="Variational Sparse Coding">
+      <a href="./vsc.html" class="pagination-link  aria-label=" &lt;span="" sparse="" coding&lt;="" span&gt;"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Variational Sparse Coding</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./conclusion.html" class="pagination-link" aria-label="Conclusion">
+      <a href="./conclusion.html" class="pagination-link" aria-label="<span class='chapter-number'>6</span>&nbsp; <span class='chapter-title'>Conclusion</span>">
         <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conclusion</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

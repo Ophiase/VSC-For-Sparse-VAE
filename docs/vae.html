@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.4.538">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -161,6 +161,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Report - Variational Sparse Coding</a> 
         <div class="sidebar-tools-main">
+    <a href="https://github.com/your-username/your-repo-namehttps://github.com/Ophiase/VSC-For-Sparse-VAE" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="./Report---Variational-Sparse-Coding.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
@@ -293,7 +294,7 @@ window.Quarto = {
 <li>When <span class="math inline">\(\beta = 1\)</span>, the <span class="math inline">\(\beta\)</span>-VAE reduces to the standard VAE.</li>
 <li>Increasing <span class="math inline">\(\beta\)</span> encourages disentanglement in the latent space, making it more interpretable but potentially at the cost of reconstruction quality.</li>
 </ul>
-<p>The <span class="math inline">\(\beta\)</span>-VAE is particularly useful in scenarios where interpretability of the latent space is critical, such as in disentangled representation learning. However, careful tuning of <span class="math inline">\(\beta\)</span> is required to balance reconstruction and disentanglement.</p>
+<p>The <span class="math inline">\(\beta\)</span>-VAE is particularly useful in scenarios where interpretability of the latent space is critical, such as in disentangled representation learning. However, careful tuning of <span class="math inline">\(\beta\)</span> is required to balance reconstruction and disentanglement. Also, <span class="math inline">\(\beta\)</span>-VAE often work under the asumption that all the target features are present in all the data points.</p>
 
 
 </section>
@@ -378,24 +379,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -430,11 +413,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -482,12 +461,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -710,12 +684,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./autoencoder.html" class="pagination-link" aria-label="Auto Encoder">
+      <a href="./autoencoder.html" class="pagination-link  aria-label=" &lt;span="" encoder&lt;="" span&gt;"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Auto Encoder</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./vsc.html" class="pagination-link" aria-label="Variational Sparse Coding">
+      <a href="./vsc.html" class="pagination-link" aria-label="<span class='chapter-number'>4</span>&nbsp; <span class='chapter-title'>Variational Sparse Coding</span>">
         <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Variational Sparse Coding</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
