@@ -194,7 +194,7 @@
     "href": "conclusion.html#code-implementation",
     "title": "6  Conclusion",
     "section": "7.3 Code Implementation",
-    "text": "7.3 Code Implementation\nYou can access the full code for Variational Sparse Coding (VSC) here.",
+    "text": "7.3 Code Implementation\nYou can access our code implementations of Variational Sparse Coding (VSC) and other related models here.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Conclusion</span>"
     ]

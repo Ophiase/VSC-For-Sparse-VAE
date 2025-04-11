@@ -40,4 +40,4 @@ The **warm-up schedule and coefficients** as well as the **sparsity target** req
 
 ## Code Implementation
 
-You can access the full code for **Variational Sparse Coding** (VSC) [here](https://github.com/Ophiase/VSC-For-Sparse-VAE).
+You can access our code implementations of **Variational Sparse Coding** (VSC) and other related models [here](https://github.com/Ophiase/VSC-For-Sparse-VAE).
