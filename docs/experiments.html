@@ -156,9 +156,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#latent-space-visualization" id="toc-latent-space-visualization" class="nav-link active" data-scroll-target="#latent-space-visualization"><span class="header-section-number">5.1</span> Latent Space Visualization</a></li>
-  <li><a href="#activated-dimensions" id="toc-activated-dimensions" class="nav-link" data-scroll-target="#activated-dimensions"><span class="header-section-number">5.2</span> Activated Dimensions</a></li>
-  <li><a href="#reconstruction" id="toc-reconstruction" class="nav-link" data-scroll-target="#reconstruction"><span class="header-section-number">5.3</span> Reconstruction</a></li>
+  <li><a href="#latent-space" id="toc-latent-space" class="nav-link active" data-scroll-target="#latent-space"><span class="header-section-number">5.1</span> Latent Space</a>
+  <ul class="collapse">
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="header-section-number">5.1.1</span> Visualization</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">5.1.2</span> Interpretation</a></li>
+  </ul></li>
+  <li><a href="#activated-dimensions" id="toc-activated-dimensions" class="nav-link" data-scroll-target="#activated-dimensions"><span class="header-section-number">5.2</span> Activated Dimensions</a>
+  <ul class="collapse">
+  <li><a href="#visualization-1" id="toc-visualization-1" class="nav-link" data-scroll-target="#visualization-1"><span class="header-section-number">5.2.1</span> Visualization</a></li>
+  <li><a href="#interpretation-1" id="toc-interpretation-1" class="nav-link" data-scroll-target="#interpretation-1"><span class="header-section-number">5.2.2</span> Interpretation</a></li>
+  </ul></li>
+  <li><a href="#reconstruction" id="toc-reconstruction" class="nav-link" data-scroll-target="#reconstruction"><span class="header-section-number">5.3</span> Reconstruction</a>
+  <ul class="collapse">
+  <li><a href="#visualization-2" id="toc-visualization-2" class="nav-link" data-scroll-target="#visualization-2"><span class="header-section-number">5.3.1</span> Visualization</a></li>
+  <li><a href="#interpretation-2" id="toc-interpretation-2" class="nav-link" data-scroll-target="#interpretation-2"><span class="header-section-number">5.3.2</span> Interpretation</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -184,47 +196,69 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In this section, we validate the theoretical insights through practical experiments.<br>
-We implemented and trained from scratch four models on the MNIST dataset: - AutoEncoder (AE) - Variational AutoEncoder (VAE)<br>
-- Variational Sparse Coding (VSC)<br>
-- Variational Sparse Coding with Warm-Up (VSC-WU)</p>
+<p>In this section, we validate the theoretical insights through practical experiments.</p>
+<p>We implemented and trained from scratch four models on the MNIST dataset:</p>
+<ul>
+<li>AutoEncoder (AE)</li>
+<li>Variational AutoEncoder (VAE)<br>
+</li>
+<li>Variational Sparse Coding (VSC)<br>
+</li>
+<li>Variational Sparse Coding with Warm-Up (VSC-WU)</li>
+</ul>
 <p>All models share the same encoder/decoder structure: three convolutional layers with ReLU activations, ensuring a fair comparison by keeping the number of parameters approximately equal. Each model was trained using the Adam optimizer over 25 epochs.</p>
 <hr>
-<section id="latent-space-visualization" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="latent-space-visualization"><span class="header-section-number">5.1</span> Latent Space Visualization</h2>
+<section id="latent-space" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="latent-space"><span class="header-section-number">5.1</span> Latent Space</h2>
+<section id="visualization" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="visualization"><span class="header-section-number">5.1.1</span> Visualization</h3>
 <p>To qualitatively evaluate the structure of the latent space, we sample from a 2D grid of latent vectors and each point is decoded to an image</p>
 <p>This provides insight into how the model organizes information in the latent space.</p>
 <p><img src="assets/graphics/autoencoder/latent_space.png" class="img-fluid" alt="AE Latent Space"> <img src="assets/graphics/vae/latent_space.png" class="img-fluid" alt="VAE Latent Space"> <img src="assets/graphics/vsc/latent_space.png" class="img-fluid" alt="VSC Latent Space"> <img src="assets/graphics/vsc_warmup/latent_space.png" class="img-fluid" alt="VSC-WU Latent Space"></p>
+</section>
+<section id="interpretation" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">5.1.2</span> Interpretation</h3>
 <p><strong>AE:</strong> Exhibits minimal structure, with random digit distribution and no discernible clustering.</p>
 <p><strong>VAE:</strong> Better organized and gradual transitions between digits.</p>
 <p><strong>VSC:</strong> Should reveal discrete clusters for each digit class but we don’t see distinct boundaries like expected with the sparse coding framework.</p>
 <p><strong>VSC-WU:</strong> Should show improved transition smoothness between clusters.</p>
 <hr>
 </section>
+</section>
 <section id="activated-dimensions" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="activated-dimensions"><span class="header-section-number">5.2</span> Activated Dimensions</h2>
+<section id="visualization-1" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="visualization-1"><span class="header-section-number">5.2.1</span> Visualization</h3>
 <p>We visualize how each latent dimension is activated across the dataset categories. For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.</p>
 <p>This helps us identify how interpretable and sparse the representations are.</p>
 <p><img src="assets/graphics/autoencoder/activated_dimensions.png" class="img-fluid" alt="AE Activated Dimensions"> <img src="assets/graphics/vae/activated_dimensions.png" class="img-fluid" alt="VAE Activated Dimensions"> <img src="assets/graphics/vsc/activated_dimensions.png" class="img-fluid" alt="VSC Activated Dimensions"> <img src="assets/graphics/vsc_warmup/activated_dimensions.png" class="img-fluid" alt="VSC-WU Activated Dimensions"></p>
-<p><strong>Interpretation:</strong></p>
+</section>
+<section id="interpretation-1" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="interpretation-1"><span class="header-section-number">5.2.2</span> Interpretation</h3>
 <p><strong>AE:</strong> Shows dense activations across all dimensions, indicating non-selective feature encoding.</p>
 <p><strong>VAE:</strong> More balanced but still overlapping activations. No clear sparsity pattern.</p>
 <p><strong>VSC:</strong> Demonstrates clear sparsity. The two dimensions remain near zero, and not the same are selectively active depending on digits. This aligns with the spike-and-slab prior’s goal of feature disentanglement. More latent dimensions could help demonstrate posterior collapse.</p>
 <p><strong>VSC-WU:</strong> Same as for VSC but with lower and more homogeonous values. More latent dimensions could help demonstrate that the warp-up strategy helps to avoid posterior collapse but it is not obvious here.</p>
 <hr>
 </section>
+</section>
 <section id="reconstruction" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="reconstruction"><span class="header-section-number">5.3</span> Reconstruction</h2>
+<section id="visualization-2" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="visualization-2"><span class="header-section-number">5.3.1</span> Visualization</h3>
 <p>Finally, we evaluate reconstruction quality by comparing recontructions of original and noisy images.</p>
 <p>This assesses both reconstruction quality and robustness to perturbations.</p>
 <p><img src="assets/graphics/autoencoder/reconstruction.png" class="img-fluid" alt="AE Reconstructions"> <img src="assets/graphics/vae/reconstruction.png" class="img-fluid" alt="VAE Reconstructions"> <img src="assets/graphics/vsc/reconstruction.png" class="img-fluid" alt="VSC Reconstructions"> <img src="assets/graphics/vsc_warmup/reconstruction.png" class="img-fluid" alt="VSC-WU Reconstructions"></p>
-<p><strong>Interpretation:</strong></p>
+</section>
+<section id="interpretation-2" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="interpretation-2"><span class="header-section-number">5.3.2</span> Interpretation</h3>
 <p><strong>AE:</strong> Generates sharp reconstructions but fails to denoise effectively.</p>
 <p><strong>VAE:</strong> Produces more robust reconstructions with partial noise suppression.</p>
 <p><strong>VSC:</strong> Low quality reconstructions.</p>
 <p><strong>VSC-WU:</strong> Low quality reconstructions.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

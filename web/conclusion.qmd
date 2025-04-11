@@ -8,22 +8,32 @@ This report explored **Variational Sparse Coding (VSC)**, an extension of Variat
 
 ## Key Contributions of VSC
 
-**Sparse Latent Representations:**
+### Sparse Latent Representations
+
 The **Spike-and-Slab prior** enforces sparsity by allowing latent dimensions to be *exactly zero* with high probability, unlike Gaussian priors in standard VAEs. This leads to **disentangled features**.
 
-**Dynamic Prior Adaptation:**
+### Dynamic Prior Adaptation
+
 The prior is learned via **pseudo-inputs** and a classifier, avoiding the rigid assumptions of a fixed Gaussian prior. This enables the model to adapt to **varying feature combinations** across data points, a limitation of β-VAEs.
 
-**Warm-Up Strategy:**
+### Warm-Up Strategy
+
 The **two-phase training** (binary-like and continuous refinement) prevents **posterior collapse**, ensuring latent dimensions remain active and interpretable.  
 
-**Sparsity Control:**  
+### Sparsity Control
+
 The **KL sparsity term** explicitly penalizes deviations from a target sparsity level, promoting efficient use of latent capacity.
 
 ## Limitations
 
-**Discrete vs. Continuous Sparsity:**
-The Spike-and-Slab prior assumes **hard sparsity** (exact zeros). For some tasks, **soft sparsity** (e.g., Laplace prior) may be more appropriate.  
+### Discrete vs. Continuous Sparsity
 
-**Task-Specific Tuning:**
-The **warm-up schedule** and **sparsity target $\alpha$** require careful tuning.  
+The Spike-and-Slab prior assumes **hard sparsity** (exact zeros). For some tasks, **soft sparsity** (e.g., Laplace prior) may be more appropriate.
+
+### Reconstruction quality
+
+VSC trades off some **reconstruction fidelity** for **interpretability**. Sparse priors can lead to blurrier outputs.
+
+### Task-Specific Tuning
+
+The **warm-up schedule and coffecients** as well as the **sparsity target** require careful tuning.

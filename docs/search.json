@@ -124,7 +124,17 @@
     "href": "experiments.html",
     "title": "5  Experiments",
     "section": "",
-    "text": "5.1 Latent Space Visualization\nTo qualitatively evaluate the structure of the latent space, we sample from a 2D grid of latent vectors and each point is decoded to an image\nThis provides insight into how the model organizes information in the latent space.\nAE: Exhibits minimal structure, with random digit distribution and no discernible clustering.\nVAE: Better organized and gradual transitions between digits.\nVSC: Should reveal discrete clusters for each digit class but we don’t see distinct boundaries like expected with the sparse coding framework.\nVSC-WU: Should show improved transition smoothness between clusters.",
+    "text": "5.1 Latent Space",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experiments</span>"
+    ]
+  },
+  {
+    "objectID": "experiments.html#latent-space",
+    "href": "experiments.html#latent-space",
+    "title": "5  Experiments",
+    "section": "",
+    "text": "5.1.1 Visualization\nTo qualitatively evaluate the structure of the latent space, we sample from a 2D grid of latent vectors and each point is decoded to an image\nThis provides insight into how the model organizes information in the latent space.\n   \n\n\n5.1.2 Interpretation\nAE: Exhibits minimal structure, with random digit distribution and no discernible clustering.\nVAE: Better organized and gradual transitions between digits.\nVSC: Should reveal discrete clusters for each digit class but we don’t see distinct boundaries like expected with the sparse coding framework.\nVSC-WU: Should show improved transition smoothness between clusters.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experiments</span>"
     ]
@@ -134,7 +144,7 @@
     "href": "experiments.html#activated-dimensions",
     "title": "5  Experiments",
     "section": "5.2 Activated Dimensions",
-    "text": "5.2 Activated Dimensions\nWe visualize how each latent dimension is activated across the dataset categories. For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.\nThis helps us identify how interpretable and sparse the representations are.\n   \nInterpretation:\nAE: Shows dense activations across all dimensions, indicating non-selective feature encoding.\nVAE: More balanced but still overlapping activations. No clear sparsity pattern.\nVSC: Demonstrates clear sparsity. The two dimensions remain near zero, and not the same are selectively active depending on digits. This aligns with the spike-and-slab prior’s goal of feature disentanglement. More latent dimensions could help demonstrate posterior collapse.\nVSC-WU: Same as for VSC but with lower and more homogeonous values. More latent dimensions could help demonstrate that the warp-up strategy helps to avoid posterior collapse but it is not obvious here.",
+    "text": "5.2 Activated Dimensions\n\n5.2.1 Visualization\nWe visualize how each latent dimension is activated across the dataset categories. For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.\nThis helps us identify how interpretable and sparse the representations are.\n   \n\n\n5.2.2 Interpretation\nAE: Shows dense activations across all dimensions, indicating non-selective feature encoding.\nVAE: More balanced but still overlapping activations. No clear sparsity pattern.\nVSC: Demonstrates clear sparsity. The two dimensions remain near zero, and not the same are selectively active depending on digits. This aligns with the spike-and-slab prior’s goal of feature disentanglement. More latent dimensions could help demonstrate posterior collapse.\nVSC-WU: Same as for VSC but with lower and more homogeonous values. More latent dimensions could help demonstrate that the warp-up strategy helps to avoid posterior collapse but it is not obvious here.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experiments</span>"
     ]
@@ -144,7 +154,7 @@
     "href": "experiments.html#reconstruction",
     "title": "5  Experiments",
     "section": "5.3 Reconstruction",
-    "text": "5.3 Reconstruction\nFinally, we evaluate reconstruction quality by comparing recontructions of original and noisy images.\nThis assesses both reconstruction quality and robustness to perturbations.\n   \nInterpretation:\nAE: Generates sharp reconstructions but fails to denoise effectively.\nVAE: Produces more robust reconstructions with partial noise suppression.\nVSC: Low quality reconstructions.\nVSC-WU: Low quality reconstructions.",
+    "text": "5.3 Reconstruction\n\n5.3.1 Visualization\nFinally, we evaluate reconstruction quality by comparing recontructions of original and noisy images.\nThis assesses both reconstruction quality and robustness to perturbations.\n   \n\n\n5.3.2 Interpretation\nAE: Generates sharp reconstructions but fails to denoise effectively.\nVAE: Produces more robust reconstructions with partial noise suppression.\nVSC: Low quality reconstructions.\nVSC-WU: Low quality reconstructions.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experiments</span>"
     ]
@@ -164,7 +174,7 @@
     "href": "conclusion.html#key-contributions-of-vsc",
     "title": "6  Conclusion",
     "section": "7.1 Key Contributions of VSC",
-    "text": "7.1 Key Contributions of VSC\nSparse Latent Representations: The Spike-and-Slab prior enforces sparsity by allowing latent dimensions to be exactly zero with high probability, unlike Gaussian priors in standard VAEs. This leads to disentangled features.\nDynamic Prior Adaptation: The prior is learned via pseudo-inputs and a classifier, avoiding the rigid assumptions of a fixed Gaussian prior. This enables the model to adapt to varying feature combinations across data points, a limitation of β-VAEs.\nWarm-Up Strategy: The two-phase training (binary-like and continuous refinement) prevents posterior collapse, ensuring latent dimensions remain active and interpretable.\nSparsity Control:\nThe KL sparsity term explicitly penalizes deviations from a target sparsity level, promoting efficient use of latent capacity.",
+    "text": "7.1 Key Contributions of VSC\n\n7.1.1 Sparse Latent Representations\nThe Spike-and-Slab prior enforces sparsity by allowing latent dimensions to be exactly zero with high probability, unlike Gaussian priors in standard VAEs. This leads to disentangled features.\n\n\n7.1.2 Dynamic Prior Adaptation\nThe prior is learned via pseudo-inputs and a classifier, avoiding the rigid assumptions of a fixed Gaussian prior. This enables the model to adapt to varying feature combinations across data points, a limitation of β-VAEs.\n\n\n7.1.3 Warm-Up Strategy\nThe two-phase training (binary-like and continuous refinement) prevents posterior collapse, ensuring latent dimensions remain active and interpretable.\n\n\n7.1.4 Sparsity Control\nThe KL sparsity term explicitly penalizes deviations from a target sparsity level, promoting efficient use of latent capacity.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Conclusion</span>"
     ]
@@ -174,7 +184,7 @@
     "href": "conclusion.html#limitations",
     "title": "6  Conclusion",
     "section": "7.2 Limitations",
-    "text": "7.2 Limitations\nDiscrete vs. Continuous Sparsity: The Spike-and-Slab prior assumes hard sparsity (exact zeros). For some tasks, soft sparsity (e.g., Laplace prior) may be more appropriate.\nTask-Specific Tuning: The warm-up schedule and sparsity target \\(\\alpha\\) require careful tuning.",
+    "text": "7.2 Limitations\n\n7.2.1 Discrete vs. Continuous Sparsity\nThe Spike-and-Slab prior assumes hard sparsity (exact zeros). For some tasks, soft sparsity (e.g., Laplace prior) may be more appropriate.\n\n\n7.2.2 Reconstruction quality\nVSC trades off some reconstruction fidelity for interpretability. Sparse priors can lead to blurrier outputs.\n\n\n7.2.3 Task-Specific Tuning\nThe warm-up schedule and coffecients as well as the sparsity target require careful tuning.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Conclusion</span>"
     ]

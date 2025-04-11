@@ -2,8 +2,10 @@
 title: Experiments
 ---
 
-In this section, we validate the theoretical insights through practical experiments.  
+In this section, we validate the theoretical insights through practical experiments.
+
 We implemented and trained from scratch four models on the MNIST dataset:
+
 - AutoEncoder (AE)
 - Variational AutoEncoder (VAE)  
 - Variational Sparse Coding (VSC)  
@@ -13,7 +15,9 @@ All models share the same encoder/decoder structure: three convolutional layers 
 
 ---
 
-## Latent Space Visualization
+## Latent Space
+
+### Visualization
 
 To qualitatively evaluate the structure of the latent space, we sample from a 2D grid of latent vectors and each point is decoded to an image 
 
@@ -23,6 +27,8 @@ This provides insight into how the model organizes information in the latent spa
 ![VAE Latent Space](assets/graphics/vae/latent_space.png)
 ![VSC Latent Space](assets/graphics/vsc/latent_space.png)
 ![VSC-WU Latent Space](assets/graphics/vsc_warmup/latent_space.png)
+
+### Interpretation
 
 **AE:** Exhibits minimal structure, with random digit distribution and no discernible clustering.
 
@@ -36,6 +42,8 @@ This provides insight into how the model organizes information in the latent spa
 
 ## Activated Dimensions
 
+### Visualization
+
 We visualize how each latent dimension is activated across the dataset categories. For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.
 
 This helps us identify how interpretable and sparse the representations are.
@@ -45,7 +53,7 @@ This helps us identify how interpretable and sparse the representations are.
 ![VSC Activated Dimensions](assets/graphics/vsc/activated_dimensions.png)
 ![VSC-WU Activated Dimensions](assets/graphics/vsc_warmup/activated_dimensions.png)
 
-**Interpretation:**
+### Interpretation
 
 **AE:** Shows dense activations across all dimensions, indicating non-selective feature encoding.
 
@@ -59,6 +67,8 @@ This helps us identify how interpretable and sparse the representations are.
 
 ## Reconstruction
 
+### Visualization
+
 Finally, we evaluate reconstruction quality by comparing recontructions of original and noisy images.
 
 This assesses both reconstruction quality and robustness to perturbations.
@@ -68,7 +78,7 @@ This assesses both reconstruction quality and robustness to perturbations.
 ![VSC Reconstructions](assets/graphics/vsc/reconstruction.png)
 ![VSC-WU Reconstructions](assets/graphics/vsc_warmup/reconstruction.png)
 
-**Interpretation:**
+### Interpretation
 
 **AE:** Generates sharp reconstructions but fails to denoise effectively.
 
