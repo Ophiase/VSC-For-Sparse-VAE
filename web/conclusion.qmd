@@ -1,3 +1,29 @@
 ---
 title: Conclusion
 ---
+
+# Conclusion
+
+This report explored **Variational Sparse Coding (VSC)**, an extension of Variational Autoencoders that introduces sparsity in the latent space via a **Spike-and-Slab prior**. Through theoretical analysis and empirical validation on MNIST, we demonstrated how VSC addresses key limitations of traditional VAEs and β-VAEs, particularly in achieving **interpretable and controllable latent representations**.
+
+## Key Contributions of VSC
+
+**Sparse Latent Representations:**
+The **Spike-and-Slab prior** enforces sparsity by allowing latent dimensions to be *exactly zero* with high probability, unlike Gaussian priors in standard VAEs. This leads to **disentangled features**.
+
+**Dynamic Prior Adaptation:**
+The prior is learned via **pseudo-inputs** and a classifier, avoiding the rigid assumptions of a fixed Gaussian prior. This enables the model to adapt to **varying feature combinations** across data points, a limitation of β-VAEs.
+
+**Warm-Up Strategy:**
+The **two-phase training** (binary-like and continuous refinement) prevents **posterior collapse**, ensuring latent dimensions remain active and interpretable.  
+
+**Sparsity Control:**  
+The **KL sparsity term** explicitly penalizes deviations from a target sparsity level, promoting efficient use of latent capacity.
+
+## Limitations
+
+**Discrete vs. Continuous Sparsity:**
+The Spike-and-Slab prior assumes **hard sparsity** (exact zeros). For some tasks, **soft sparsity** (e.g., Laplace prior) may be more appropriate.  
+
+**Task-Specific Tuning:**
+The **warm-up schedule** and **sparsity target $\alpha$** require careful tuning.  

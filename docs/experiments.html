@@ -185,39 +185,44 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>In this section, we validate the theoretical insights through practical experiments.<br>
-We implemented and trained from scratch four models on the MNIST dataset:</p>
-<ul>
-<li>AutoEncoder (AE)</li>
-<li>Variational AutoEncoder (VAE)<br>
-</li>
-<li>Variational Sparse Coding (VSC)<br>
-</li>
-<li>Variational Sparse Coding with Warm-Up (VSC-WU)</li>
-</ul>
-<p>All models share the same encoder/decoder structure: three convolutional layers with ReLU activations, ensuring a fair comparison by keeping the number of parameters approximately equal. Each model was trained using the Adam optimizer over ? epochs.</p>
+We implemented and trained from scratch four models on the MNIST dataset: - AutoEncoder (AE) - Variational AutoEncoder (VAE)<br>
+- Variational Sparse Coding (VSC)<br>
+- Variational Sparse Coding with Warm-Up (VSC-WU)</p>
+<p>All models share the same encoder/decoder structure: three convolutional layers with ReLU activations, ensuring a fair comparison by keeping the number of parameters approximately equal. Each model was trained using the Adam optimizer over 25 epochs.</p>
 <hr>
 <section id="latent-space-visualization" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="latent-space-visualization"><span class="header-section-number">5.1</span> Latent Space Visualization</h2>
-<p>To qualitatively evaluate the structure of the latent space, we sample from a 2D grid of latent vectors.<br>
-Each point is decoded to an image, providing insight into how the model organizes information in the latent space.</p>
+<p>To qualitatively evaluate the structure of the latent space, we sample from a 2D grid of latent vectors and each point is decoded to an image</p>
+<p>This provides insight into how the model organizes information in the latent space.</p>
 <p><img src="assets/graphics/autoencoder/latent_space.png" class="img-fluid" alt="AE Latent Space"> <img src="assets/graphics/vae/latent_space.png" class="img-fluid" alt="VAE Latent Space"> <img src="assets/graphics/vsc/latent_space.png" class="img-fluid" alt="VSC Latent Space"> <img src="assets/graphics/vsc_warmup/latent_space.png" class="img-fluid" alt="VSC-WU Latent Space"></p>
-<p>TODO : interpretation</p>
+<p><strong>AE:</strong> Exhibits minimal structure, with random digit distribution and no discernible clustering.</p>
+<p><strong>VAE:</strong> Better organized and gradual transitions between digits.</p>
+<p><strong>VSC:</strong> Should reveal discrete clusters for each digit class but we don’t see distinct boundaries like expected with the sparse coding framework.</p>
+<p><strong>VSC-WU:</strong> Should show improved transition smoothness between clusters.</p>
 <hr>
 </section>
 <section id="activated-dimensions" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="activated-dimensions"><span class="header-section-number">5.2</span> Activated Dimensions</h2>
-<p>We visualize how each latent dimension is activated across the dataset categories.<br>
-For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.</p>
-<p>This helps us identify how interpretable and sparse the representations are, especially for the VSC models.</p>
+<p>We visualize how each latent dimension is activated across the dataset categories. For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.</p>
+<p>This helps us identify how interpretable and sparse the representations are.</p>
 <p><img src="assets/graphics/autoencoder/activated_dimensions.png" class="img-fluid" alt="AE Activated Dimensions"> <img src="assets/graphics/vae/activated_dimensions.png" class="img-fluid" alt="VAE Activated Dimensions"> <img src="assets/graphics/vsc/activated_dimensions.png" class="img-fluid" alt="VSC Activated Dimensions"> <img src="assets/graphics/vsc_warmup/activated_dimensions.png" class="img-fluid" alt="VSC-WU Activated Dimensions"></p>
-<p>TODO: interpretation</p>
+<p><strong>Interpretation:</strong></p>
+<p><strong>AE:</strong> Shows dense activations across all dimensions, indicating non-selective feature encoding.</p>
+<p><strong>VAE:</strong> More balanced but still overlapping activations. No clear sparsity pattern.</p>
+<p><strong>VSC:</strong> Demonstrates clear sparsity. The two dimensions remain near zero, and not the same are selectively active depending on digits. This aligns with the spike-and-slab prior’s goal of feature disentanglement. More latent dimensions could help demonstrate posterior collapse.</p>
+<p><strong>VSC-WU:</strong> Same as for VSC but with lower and more homogeonous values. More latent dimensions could help demonstrate that the warp-up strategy helps to avoid posterior collapse but it is not obvious here.</p>
 <hr>
 </section>
 <section id="reconstruction" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="reconstruction"><span class="header-section-number">5.3</span> Reconstruction</h2>
-<p>Finally, we evaluate reconstruction quality by comparing recontructing original and noisy images. This assesses both fidelity and robustness to perturbations.</p>
+<p>Finally, we evaluate reconstruction quality by comparing recontructions of original and noisy images.</p>
+<p>This assesses both reconstruction quality and robustness to perturbations.</p>
 <p><img src="assets/graphics/autoencoder/reconstruction.png" class="img-fluid" alt="AE Reconstructions"> <img src="assets/graphics/vae/reconstruction.png" class="img-fluid" alt="VAE Reconstructions"> <img src="assets/graphics/vsc/reconstruction.png" class="img-fluid" alt="VSC Reconstructions"> <img src="assets/graphics/vsc_warmup/reconstruction.png" class="img-fluid" alt="VSC-WU Reconstructions"></p>
-<p>TODO: interpretation</p>
+<p><strong>Interpretation:</strong></p>
+<p><strong>AE:</strong> Generates sharp reconstructions but fails to denoise effectively.</p>
+<p><strong>VAE:</strong> Produces more robust reconstructions with partial noise suppression.</p>
+<p><strong>VSC:</strong> Low quality reconstructions.</p>
+<p><strong>VSC-WU:</strong> Low quality reconstructions.</p>
 
 
 </section>

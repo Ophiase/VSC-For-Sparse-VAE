@@ -68,6 +68,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -151,7 +180,17 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link active" data-scroll-target="#conclusion"><span class="header-section-number">7</span> Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#key-contributions-of-vsc" id="toc-key-contributions-of-vsc" class="nav-link" data-scroll-target="#key-contributions-of-vsc"><span class="header-section-number">7.1</span> Key Contributions of VSC</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">7.2</span> Limitations</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -175,8 +214,25 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="conclusion" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Conclusion</h1>
+<p>This report explored <strong>Variational Sparse Coding (VSC)</strong>, an extension of Variational Autoencoders that introduces sparsity in the latent space via a <strong>Spike-and-Slab prior</strong>. Through theoretical analysis and empirical validation on MNIST, we demonstrated how VSC addresses key limitations of traditional VAEs and β-VAEs, particularly in achieving <strong>interpretable and controllable latent representations</strong>.</p>
+<section id="key-contributions-of-vsc" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="key-contributions-of-vsc"><span class="header-section-number">7.1</span> Key Contributions of VSC</h2>
+<p><strong>Sparse Latent Representations:</strong> The <strong>Spike-and-Slab prior</strong> enforces sparsity by allowing latent dimensions to be <em>exactly zero</em> with high probability, unlike Gaussian priors in standard VAEs. This leads to <strong>disentangled features</strong>.</p>
+<p><strong>Dynamic Prior Adaptation:</strong> The prior is learned via <strong>pseudo-inputs</strong> and a classifier, avoiding the rigid assumptions of a fixed Gaussian prior. This enables the model to adapt to <strong>varying feature combinations</strong> across data points, a limitation of β-VAEs.</p>
+<p><strong>Warm-Up Strategy:</strong> The <strong>two-phase training</strong> (binary-like and continuous refinement) prevents <strong>posterior collapse</strong>, ensuring latent dimensions remain active and interpretable.</p>
+<p><strong>Sparsity Control:</strong><br>
+The <strong>KL sparsity term</strong> explicitly penalizes deviations from a target sparsity level, promoting efficient use of latent capacity.</p>
+</section>
+<section id="limitations" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="limitations"><span class="header-section-number">7.2</span> Limitations</h2>
+<p><strong>Discrete vs.&nbsp;Continuous Sparsity:</strong> The Spike-and-Slab prior assumes <strong>hard sparsity</strong> (exact zeros). For some tasks, <strong>soft sparsity</strong> (e.g., Laplace prior) may be more appropriate.</p>
+<p><strong>Task-Specific Tuning:</strong> The <strong>warm-up schedule</strong> and <strong>sparsity target <span class="math inline">\(\alpha\)</span></strong> require careful tuning.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

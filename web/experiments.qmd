@@ -4,55 +4,76 @@ title: Experiments
 
 In this section, we validate the theoretical insights through practical experiments.  
 We implemented and trained from scratch four models on the MNIST dataset:
-
 - AutoEncoder (AE)
 - Variational AutoEncoder (VAE)  
 - Variational Sparse Coding (VSC)  
 - Variational Sparse Coding with Warm-Up (VSC-WU)
 
-All models share the same encoder/decoder structure: three convolutional layers with ReLU activations, ensuring a fair comparison by keeping the number of parameters approximately equal.
-Each model was trained using the Adam optimizer over ? epochs.
+All models share the same encoder/decoder structure: three convolutional layers with ReLU activations, ensuring a fair comparison by keeping the number of parameters approximately equal. Each model was trained using the Adam optimizer over 25 epochs.
 
 ---
 
 ## Latent Space Visualization
 
-To qualitatively evaluate the structure of the latent space, we sample from a 2D grid of latent vectors.  
-Each point is decoded to an image, providing insight into how the model organizes information in the latent space.
+To qualitatively evaluate the structure of the latent space, we sample from a 2D grid of latent vectors and each point is decoded to an image 
+
+This provides insight into how the model organizes information in the latent space.
 
 ![AE Latent Space](assets/graphics/autoencoder/latent_space.png)
 ![VAE Latent Space](assets/graphics/vae/latent_space.png)
 ![VSC Latent Space](assets/graphics/vsc/latent_space.png)
 ![VSC-WU Latent Space](assets/graphics/vsc_warmup/latent_space.png)
 
-TODO : interpretation
+**AE:** Exhibits minimal structure, with random digit distribution and no discernible clustering.
+
+**VAE:** Better organized and gradual transitions between digits.
+
+**VSC:** Should reveal discrete clusters for each digit class but we don't see distinct boundaries like expected with the sparse coding framework.
+
+**VSC-WU:** Should show improved transition smoothness between clusters.
 
 ---
 
 ## Activated Dimensions
 
-We visualize how each latent dimension is activated across the dataset categories.  
-For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.
+We visualize how each latent dimension is activated across the dataset categories. For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.
 
-This helps us identify how interpretable and sparse the representations are, especially for the VSC models.
+This helps us identify how interpretable and sparse the representations are.
 
 ![AE Activated Dimensions](assets/graphics/autoencoder/activated_dimensions.png)
 ![VAE Activated Dimensions](assets/graphics/vae/activated_dimensions.png)
 ![VSC Activated Dimensions](assets/graphics/vsc/activated_dimensions.png)
 ![VSC-WU Activated Dimensions](assets/graphics/vsc_warmup/activated_dimensions.png)
 
-TODO: interpretation
+**Interpretation:**
+
+**AE:** Shows dense activations across all dimensions, indicating non-selective feature encoding.
+
+**VAE:** More balanced but still overlapping activations. No clear sparsity pattern.
+
+**VSC:** Demonstrates clear sparsity. The two dimensions remain near zero, and not the same are selectively active depending on digits. This aligns with the spike-and-slab prior's goal of feature disentanglement. More latent dimensions could help demonstrate posterior collapse.
+
+**VSC-WU:** Same as for VSC but with lower and more homogeonous values. More latent dimensions could help demonstrate that the warp-up strategy helps to avoid posterior collapse but it is not obvious here.
 
 ---
 
 ## Reconstruction
 
-Finally, we evaluate reconstruction quality by comparing recontructing original and noisy images.
-This assesses both fidelity and robustness to perturbations.
+Finally, we evaluate reconstruction quality by comparing recontructions of original and noisy images.
+
+This assesses both reconstruction quality and robustness to perturbations.
 
 ![AE Reconstructions](assets/graphics/autoencoder/reconstruction.png)
 ![VAE Reconstructions](assets/graphics/vae/reconstruction.png)
 ![VSC Reconstructions](assets/graphics/vsc/reconstruction.png)
 ![VSC-WU Reconstructions](assets/graphics/vsc_warmup/reconstruction.png)
 
-TODO: interpretation
+**Interpretation:**
+
+**AE:** Generates sharp reconstructions but fails to denoise effectively.
+
+**VAE:** Produces more robust reconstructions with partial noise suppression.
+
+**VSC:** Low quality reconstructions.
+
+**VSC-WU:** Low quality reconstructions.
