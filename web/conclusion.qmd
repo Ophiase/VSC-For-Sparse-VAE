@@ -34,6 +34,10 @@ The Spike-and-Slab prior assumes **hard sparsity** (exact zeros). For some tasks
 
 VSC trades off some **reconstruction fidelity** for **interpretability**. Sparse priors can lead to blurrier outputs.
 
-### Task-Specific Tuning
+### Parameter sensitivity
 
-The **warm-up schedule and coffecients** as well as the **sparsity target** require careful tuning.
+The **warm-up schedule and coefficients** as well as the **sparsity target** require careful tuning. The model remains unstable when adjusting the spike parameter (collapse for values ≠ 1.0), suggesting implementation-specific tuning is required.
+
+## Code Implementation
+
+You can access our code implementations of **Variational Sparse Coding** (VSC) and other related models [here](https://github.com/Ophiase/VSC-For-Sparse-VAE).

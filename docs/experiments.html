@@ -237,7 +237,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="5.2.2" class="anchored" data-anchor-id="interpretation-1"><span class="header-section-number">5.2.2</span> Interpretation</h3>
 <p><strong>AE:</strong> Shows dense activations across all dimensions, indicating non-selective feature encoding.</p>
 <p><strong>VAE:</strong> More balanced but still overlapping activations. No clear sparsity pattern.</p>
-<p><strong>VSC:</strong> Demonstrates clear sparsity. The two dimensions remain near zero, and not the same are selectively active depending on digits. This aligns with the spike-and-slab prior’s goal of feature disentanglement. More latent dimensions could help demonstrate posterior collapse.</p>
+<p><strong>VSC:</strong> Demonstrates clear sparsity. The two dimensions remain near zero, and not the same are selectively active depending on digits. This aligns with the spike-and-slab prior’s goal of feature disentanglement. More latent dimensions could help demonstrate posterior collapse. <em>Note: During our experiments, we didn’t find the authors’ tuning that prevented collapse with spike values ≠ 1.0</em></p>
 <p><strong>VSC-WU:</strong> Same as for VSC but with lower and more homogeonous values. More latent dimensions could help demonstrate that the warp-up strategy helps to avoid posterior collapse but it is not obvious here.</p>
 <hr>
 </section>
