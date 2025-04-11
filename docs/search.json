@@ -144,7 +144,7 @@
     "href": "experiments.html#activated-dimensions",
     "title": "5  Experiments",
     "section": "5.2 Activated Dimensions",
-    "text": "5.2 Activated Dimensions\n\n5.2.1 Visualization\nWe visualize how each latent dimension is activated across the dataset categories. For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.\nThis helps us identify how interpretable and sparse the representations are.\n   \n\n\n5.2.2 Interpretation\nAE: Shows dense activations across all dimensions, indicating non-selective feature encoding.\nVAE: More balanced but still overlapping activations. No clear sparsity pattern.\nVSC: Demonstrates clear sparsity. The two dimensions remain near zero, and not the same are selectively active depending on digits. This aligns with the spike-and-slab prior’s goal of feature disentanglement. More latent dimensions could help demonstrate posterior collapse.\nVSC-WU: Same as for VSC but with lower and more homogeonous values. More latent dimensions could help demonstrate that the warp-up strategy helps to avoid posterior collapse but it is not obvious here.",
+    "text": "5.2 Activated Dimensions\n\n5.2.1 Visualization\nWe visualize how each latent dimension is activated across the dataset categories. For each class (0 to 9), we compute the mean latent vector and display it as a heatmap.\nThis helps us identify how interpretable and sparse the representations are.\n   \n\n\n5.2.2 Interpretation\nAE: Shows dense activations across all dimensions, indicating non-selective feature encoding.\nVAE: More balanced but still overlapping activations. No clear sparsity pattern.\nVSC: Demonstrates clear sparsity. The two dimensions remain near zero, and not the same are selectively active depending on digits. This aligns with the spike-and-slab prior’s goal of feature disentanglement. More latent dimensions could help demonstrate posterior collapse. Note: During our experiments, we didn’t find the authors’ tuning that prevented collapse with spike values ≠ 1.0\nVSC-WU: Same as for VSC but with lower and more homogeonous values. More latent dimensions could help demonstrate that the warp-up strategy helps to avoid posterior collapse but it is not obvious here.",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Experiments</span>"
     ]
@@ -184,7 +184,17 @@
     "href": "conclusion.html#limitations",
     "title": "6  Conclusion",
     "section": "7.2 Limitations",
-    "text": "7.2 Limitations\n\n7.2.1 Discrete vs. Continuous Sparsity\nThe Spike-and-Slab prior assumes hard sparsity (exact zeros). For some tasks, soft sparsity (e.g., Laplace prior) may be more appropriate.\n\n\n7.2.2 Reconstruction quality\nVSC trades off some reconstruction fidelity for interpretability. Sparse priors can lead to blurrier outputs.\n\n\n7.2.3 Task-Specific Tuning\nThe warm-up schedule and coffecients as well as the sparsity target require careful tuning.",
+    "text": "7.2 Limitations\n\n7.2.1 Discrete vs. Continuous Sparsity\nThe Spike-and-Slab prior assumes hard sparsity (exact zeros). For some tasks, soft sparsity (e.g., Laplace prior) may be more appropriate.\n\n\n7.2.2 Reconstruction quality\nVSC trades off some reconstruction fidelity for interpretability. Sparse priors can lead to blurrier outputs.\n\n\n7.2.3 Parameter sensitivity\nThe warm-up schedule and coefficients as well as the sparsity target require careful tuning. The model remains unstable when adjusting the spike parameter (collapse for values ≠ 1.0), suggesting implementation-specific tuning is required.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Conclusion</span>"
+    ]
+  },
+  {
+    "objectID": "conclusion.html#code-implementation",
+    "href": "conclusion.html#code-implementation",
+    "title": "6  Conclusion",
+    "section": "7.3 Code Implementation",
+    "text": "7.3 Code Implementation\nYou can access the full code for Variational Sparse Coding (VSC) here.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Conclusion</span>"
     ]
