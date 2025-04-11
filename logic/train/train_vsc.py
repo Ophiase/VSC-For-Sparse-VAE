@@ -105,7 +105,9 @@ def train_vsc_warmup(model: VSC,
         # Warm-up : Increase warmup up to n_warmup
         if iteration < n_warmup:
             model.lambda_val = min(1.0, model.lambda_val + delta_lambda)
-        iteration += 1
+            iteration += 1
+        else:
+            model.lambda_val = 1.0
 
         avg_loss = total_loss / len(dataloader)
         avg_recon_loss = total_recon_loss / len(dataloader)
